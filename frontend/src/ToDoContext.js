@@ -11,20 +11,16 @@ export const useTodos = () => {
 
 export const ToDoProvider = ({ children }) => {
   const [todos, setTodos] = useState([]);
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchTodos = async () => {
-      setLoading(true);
       try {
         const response = await axios.get("http://localhost:3000/api/todos");
         setTodos(response.data.todos);
       } catch (error) {
         console.error("Error fetching todos:", error);
         toast.error("Failed to fetch todos. Please try again later.");
-      } finally {
-        setLoading(false);
-      }
+      } 
     };
     fetchTodos();
   }, []);
@@ -52,10 +48,20 @@ export const ToDoProvider = ({ children }) => {
     }
   };
 
+  const editToDo = async (id, updatedToDo) => {
+    try {
+      const response = await axios.put(`http://localhost:3000/api/todos/${id}`, updatedToDo);
+      setTodos(todos.map((todo) => (todo._id === id ? response.data : todo)));
+      toast.success("Todo updated successfully!");
+    } catch (error) {
+      console.error('Error editing todo:', error);
+      toast.error("Failed to update todo. Please try again later.");
+    }
+  };
 
   return (
     <ToDoContext.Provider
-      value={{ todos, loading, deleteToDo, markAsDone }}
+      value={{ todos, deleteToDo, markAsDone, editToDo }}
     >
       {children}
       <ToastContainer />
