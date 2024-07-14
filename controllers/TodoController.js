@@ -1,6 +1,6 @@
 const Todo = require("../model/Todo");
 
-const creatTodo = async (req, res) => {
+const createTodo = async (req, res) => {
   try {
     const { title, description, dateToComplete } = req.body;
     if(!title || !description || !dateToComplete){
@@ -18,4 +18,14 @@ const creatTodo = async (req, res) => {
   }
 };
 
-module.exports = creatTodo ;
+const getTodos = async (req, res) => {
+    try {
+        const todos = await Todo.find();
+        return res.status(200).json({ todos });
+    }catch(error){
+        console.log(error);
+        return res.status(500).json({error: 'Server Error : ', error})
+    }
+}
+
+module.exports = {createTodo, getTodos} ;
