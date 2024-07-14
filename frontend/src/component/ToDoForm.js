@@ -19,12 +19,11 @@ const ToDoForm = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:3000/api/todos", formData, {
+       await axios.post("http://localhost:3000/api/todos", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log(response.data);
       setTitle("");
       setDateToComplete("");
       setDescription("");

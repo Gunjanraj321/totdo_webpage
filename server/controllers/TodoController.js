@@ -9,7 +9,6 @@ const createTodo = async (req, res) => {
     }
 
     let imageUrl = "";
-    console.log(req.file)
     if (req.file) {
       const data = await uploadToS3(req.file.buffer, req.file.originalname);
       imageUrl = data;
