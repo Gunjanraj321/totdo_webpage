@@ -19,10 +19,8 @@ const uploadToS3 = (data, filename) => {
     };
     s3bucket.upload(params, (err, data) => {
       if (err) {
-        console.log("Something went wrong", err);
         reject(err);
       } else {
-        console.log("success", data);
         resolve(data.Location);
       }
     });

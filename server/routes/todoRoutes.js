@@ -11,10 +11,10 @@ const {
   updateTodo,
 } = require("../controllers/TodoController");
 
-router.post("/todos", upload.single('imageUrl'), createTodo);
-router.get("/todos", getTodos);
-router.delete("/todos/:id", deleteTodo);
-router.patch("/todos/:id", markAsCompleted);
-router.put("/todos/:id", updateTodo);
+router.post("/", upload.single('imageUrl'), createTodo);
+router.get("/", getTodos);
+router.delete("/:id", deleteTodo);
+router.patch("/:id", markAsCompleted);
+router.put("/:id", updateTodo);
 
 module.exports = router;

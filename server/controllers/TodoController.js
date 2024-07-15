@@ -1,4 +1,4 @@
-const Todo = require("../model/Todo");
+const Todo = require("../models/Todo");
 const { uploadToS3 } = require("../util/s3Services");
 
 const createTodo = async (req, res) => {
@@ -21,7 +21,6 @@ const createTodo = async (req, res) => {
     });
     res.status(201).json(todo);
   } catch (error) {
-    console.log(error);
     res.status(500).json({ error: "Server Error : ", error });
   }
 };
